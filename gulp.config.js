@@ -16,15 +16,15 @@
       },
       dev: {
         root: './dev',
-        styles: {
-          root: './dev/styles',
-          bootstrap: './dev/styles/bootstrap',
-          bootstrapOverrides: './dev/styles/bootstrap_overrides',
-          elements: './dev/styles/elements',
-          govUkElements: './dev/styles/govuk_elements',
-          govUkFrontendToolkit: './dev/styles/govuk_frontend_toolkit',
-          govUkOverrides: './dev/styles/govuk_overrides',
-          govUkTemplate: './dev/styles/govuk_template'
+        sass: {
+          root: './dev/sass',
+          bootstrap: './dev/sass/bootstrap',
+          bootstrapOverrides: './dev/sass/bootstrap_overrides',
+          elements: './dev/sass/elements',
+          govUkElements: './dev/sass/govuk_elements',
+          govUkFrontendToolkit: './dev/sass/govuk_frontend_toolkit',
+          govUkOverrides: './dev/sass/govuk_overrides',
+          govUkTemplate: './dev/sass/govuk_template'
         },
         assets: {
           root: './dev/assets',

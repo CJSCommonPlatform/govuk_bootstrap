@@ -11,16 +11,14 @@ module.exports = function (config) {
       .pipe($.clean());
   });
 
-  gulp.task('clean-docs', ['clean-dist'], function () {
+  gulp.task('clean-docs', function () {
     return gulp.src(config.docs.app.root, {read: false})
       .pipe($.clean());
   });
 
   gulp.task('clean-dist', function () {
-    if ($.util.env.dist || $.util.env.travis) {
-      return gulp.src(config.dist.root, {read: false})
-        .pipe($.clean());
-    }
+    return gulp.src(config.dist.root, {read: false})
+      .pipe($.clean());
   });
 
 };
