@@ -1,5 +1,5 @@
 # IDE Generated Files
-.idea
+.idea/*
 
 # OS Generated Files
 *.DS_Store
