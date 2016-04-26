@@ -3,18 +3,14 @@ set -ev
 # BRANCH_NAME=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD)
 
 
-if [ "$TRAVIS_TAG" != "" ]; then
-
-  #git add dist/.
-  #git commit -m "Deploy dist for tag $TRAVIS_TAG"
-  #git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master > /dev/null 2>&1
+#if [ "$TRAVIS_TAG" != "" ]; then
 
   cd docs/app
   git init
 
   # inside this git repo create Travis user
-  git config user.name "Travis CI"
-  git config user.email "james@jamesbirrellgray.com"
+  git config user.name "vygis"
+  git config user.email "vygintas.ranonis@gmail.com"
 
   # The first and only commit to this new Git repo contains all the
   # files present with the commit message "Deploy to GitHub Pages".
@@ -26,4 +22,4 @@ if [ "$TRAVIS_TAG" != "" ]; then
   # will be lost, since we are overwriting it.) We redirect any output to
   # /dev/null to hide any sensitive credential data that might otherwise be exposed.
   git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages > /dev/null 2>&1
-fi
+#fi
