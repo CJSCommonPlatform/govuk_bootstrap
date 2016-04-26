@@ -1,12 +1,11 @@
 {
   "name": "govuk_bootstrap",
-  "version": "0.0.1",
-  "author": "James A B Gray",
+  "version": "0.0.5",
+  "author": "Vygintas Ranonis",
   "repository": {
     "type": "git",
-    "url": "needRepoUrl"
+    "url": "https://github.com/CJSCommonPlatform/govuk_bootstrap"
   },
-  "private": true,
   "dependencies": {
     "bootstrap-sass": "^3.3.6",
     "govuk-elements-sass": "^1.1.4",
