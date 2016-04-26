@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="app" id="ng-app">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
+  <link rel="mask-icon" href="assets/images/gov.uk_logotype_crown.svg" color="#0b0c0c">
+  <title>GovUK Bootstrap</title>
+  <link rel="stylesheet" href="assets/main.css" type="text/css"/>
+</head>
+<body id="top">
+  {{> header}}
+  <div id="global-header-bar"></div>
+  <main role="main">
+    <div class="container">
+      <h1>{{_page.title}}</h1>
+      {{{ content }}}
+    </div>
+  </main>
+  {{> footer}}
+</body>
+</html>

@@ -1,0 +1,24 @@
+<header role="banner" id="global-header" class="with-proposition">
+  <div class="header-wrapper">
+    <div class="header-global">
+      <div class="header-logo">
+        <a href="https://www.gov.uk" title="Go to the GOV.UK homepage" id="logo" class="content">
+          <img src="/public/images/gov.uk_logotype_crown_invert_trans.png?0.17.0" width="35" height="31" alt=""> GOV.UK
+        </a>
+      </div>
+    </div>
+    <div class="header-proposition">
+      <div class="content">
+        <a href="#proposition-links" class="js-header-toggle menu">Menu</a>
+        <nav id="proposition-menu">
+          <a href="{{_structure.0.href}}" id="proposition-name">GOV.UK Bootstrap</a>
+          <ul id="proposition-links">
+            {{#each _structure}}
+              <li><a href="{{this.href}}">{{this.title}}</a></li>
+            {{/each}}
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>

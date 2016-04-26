@@ -1,0 +1,26 @@
+# IDE Generated Files
+.idea
+
+# OS Generated Files
+*.DS_Store
+
+# Git Config Files
+.gitconfig
+
+# Third Party Components
+node_modules
+
+# Code Generated Files
+dev/*
+docs/app/*
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.sln
+
+
+# Visual Studio 2015 cache/options directory
+.vs/
