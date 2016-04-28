@@ -48,7 +48,7 @@
           assets: './docs/app/assets',
           pageObject: {
             index : {
-              title : 'Introduction',
+              title : 'About',
               href : 'index.html'
             },
             css : {
@@ -58,6 +58,10 @@
             elements : {
               title : 'Elements',
               href : 'elements.html'
+            },
+            developer_guide : {
+              title : 'Developer Guide',
+              href : 'developer_guide.html'
             }
           }
         }

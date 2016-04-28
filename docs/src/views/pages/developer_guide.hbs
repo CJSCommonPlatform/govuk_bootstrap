@@ -1,0 +1,16 @@
+<p>The module is open sourced at
+  <a href="https://github.com/CJSCommonPlatform/govuk_bootstrap/">github.com/CJSCommonPlatform/govuk_bootstrap/</a>
+</p>
+<p>This demo website is served from Github's <code>gh-pages</code> branch.</p>
+<h2>Publishing</h2>
+<p>Continuous integration is set up in Travis CI.</p>
+<p>To publish an update:
+  <ol>
+    <li>Create a pull request in the repository with the desired changes</li>
+    <li>As part of the PR, update the version in the package.json file (following semver guidelines)</li>
+    <li>Once the code is merged into the <code>master</code> branch, create the corresponding version tag based on it</li>
+    <li>Push the new tag into the repository</li>
+    <li>If the tag build is successful, Travis will republish the NPM module with the tag version,
+      and will also deploy any changes to the demo website files in the <code>gh-pages</code>branch.</li>
+  </ol>
+</p>
