@@ -18,7 +18,7 @@ module.exports = function (config) {
       config.src.styles.bootstrapOverrides + '/**/*.scss',
       config.src.styles.elements + '/**/*.scss',
       config.src.styles.govUkOverrides + '/**/*.scss'], function () {
-      runSequence('copy-to-css', 'build-css', 'build-docs-app', browserSync.reload);
+      runSequence('copy-to-dev', 'build-css', 'build-docs-app', browserSync.reload);
     });
 
     //docs handlebards template and views

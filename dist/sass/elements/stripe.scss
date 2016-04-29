@@ -1,3 +1,14 @@
+/**USAGE:
+<div class="stripe">
+  <div class="container"><span class="stripe-subtext">1234567</span>&nbsp;&nbsp;John Brown</div>
+</div>
+*/
+
 .stripe {
-  color: red;
+  background-color: $purple;
+  color: $white;
+  padding: 14px 0 9px;
+  .stripe-subtext {
+    color: lighten($purple, 55%);
+  }
 }

@@ -8,7 +8,22 @@
   <link rel="mask-icon" href="assets/images/gov.uk_logotype_crown.svg" color="#0b0c0c">
   <title>GovUK Bootstrap</title>
   <link rel="stylesheet" href="assets/govuk_bootstrap.css" type="text/css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/themes/prism.min.css"/>
 </head>
+<script>
+  document.addEventListener("DOMContentLoaded", init, false);
+  function init() {
+    var codeBlocks = document.querySelectorAll("pre code");
+    if(codeBlocks.length) {
+      for(var i=0, len=codeBlocks.length; i<len; i++) {
+        var dom = codeBlocks[i];
+        var html = dom.innerHTML;
+        html = html.replace(/</g,"&lt;").replace(/>/g,"&gt;");
+        dom.innerHTML = html;
+      }
+    }
+  }
+</script>
 <body id="top">
   {{> header}}
   <div id="global-header-bar"></div>
@@ -19,5 +34,10 @@
     </div>
   </main>
   {{> footer}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/components/prism-markup.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/components/prism-clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/components/prism-javascript.min.js"></script>
+
 </body>
 </html>
