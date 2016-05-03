@@ -1,0 +1,10 @@
+.breadcrumbs {
+  ol {
+    padding-left: 0;
+    li {
+      a:hover, a:focus {
+        color: $text-colour;
+      }
+    }
+  }
+}

@@ -11,10 +11,15 @@
       <div class="content">
         <a href="#proposition-links" class="js-header-toggle menu">Menu</a>
         <nav id="proposition-menu">
-          <a href="{{_structure.0.href}}" id="proposition-name">GOV.UK Bootstrap</a>
+
+            <a href="{{_structure.0.href}}" id="proposition-name">GOV.UK Bootstrap</a>
+
           <ul id="proposition-links">
             {{#each _structure}}
-              <li><a href="{{this.href}}">{{this.title}}</a></li>
+              {{@index}}
+              {{#unless @first}}
+                <li><a href="{{this.href}}">{{this.title}}</a></li>
+              {{/unless}}
             {{/each}}
           </ul>
         </nav>

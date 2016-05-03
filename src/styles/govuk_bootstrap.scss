@@ -1,24 +1,42 @@
 //govuk_bootstrap
 //govuk_angular_components
 
+$path: 'images/';
+/* Why doesnt this work on import? */
+@import "govuk_frontend_toolkit/helpers";
+
+@function em($px, $base: 19) {
+  @return ($px / $base) + em;
+}
+/* ------ */
+
+
 @import "govuk_frontend_toolkit/colours";
 @import "govuk_frontend_toolkit/measurements";
-@import "govuk_frontend_toolkit/helpers";
 @import "govuk_frontend_toolkit/typography";
 @import "govuk_frontend_toolkit/grid_layout";
+@import "govuk_frontend_toolkit/design-patterns/alpha-beta";
+@import "govuk_frontend_toolkit/design-patterns/breadcrumbs";
 
-@import "govuk_elements/elements/govuk-template-base";
-
+// Govuk_templates
 @import "govuk_template/fonts"; //raw css that includes base64 encoded fonts
 @import "govuk_template/govuk-template"; //this is a raw css file
 
+// Govuk_elements
+@import "govuk_elements/elements/govuk-template-base";
+@import "govuk_elements/elements/elements-typography";
+@import "govuk_elements/elements/phase-banner";
+@import "govuk_elements/elements/breadcrumbs";
+@import "govuk_elements/elements/tables";
 
-@import "bootstrap_overrides/variables";
 
 //BOOTSTRAP START
 
+// Variables Overrides
+
+@import "bootstrap_overrides/variables";
+
 // Core variables and mixins
-@import "bootstrap/bootstrap/variables";
 @import "bootstrap/bootstrap/mixins";
 
 // Reset and dependencies
@@ -26,12 +44,16 @@
 
 // Core CSS
 @import "bootstrap/bootstrap/scaffolding";
-@import "bootstrap/bootstrap/type";
-@import "bootstrap/bootstrap/code";
+//@import "bootstrap/bootstrap/code";
 @import "bootstrap/bootstrap/grid";
-@import "bootstrap/bootstrap/tables";
+//@import "bootstrap/bootstrap/tables";
 @import "bootstrap/bootstrap/forms";
-//@import "bootstrap/bootstrap/buttons";
+@import "bootstrap/bootstrap/buttons";
+
+// Core CSS Overrides
+@import "bootstrap_overrides/type";
+@import "bootstrap_overrides/code";
+@import "bootstrap_overrides/tables";
 
 // Components
 @import "bootstrap/bootstrap/component-animations";
@@ -65,11 +87,17 @@
 @import "bootstrap/bootstrap/utilities";
 @import "bootstrap/bootstrap/responsive-utilities";
 
+
+
+
 //BOOTSTRAP END
 
 @import "govuk_overrides/layout";
 @import "govuk_overrides/header";
 @import "govuk_overrides/footer";
+@import "govuk_overrides/breadcrumbs";
+@import "govuk_overrides/lists";
+
 
 //ELEMENTS
 

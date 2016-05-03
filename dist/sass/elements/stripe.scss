@@ -1,14 +1,15 @@
 /**USAGE:
 <div class="stripe">
-  <div class="container"><span class="stripe-subtext">1234567</span>&nbsp;&nbsp;John Brown</div>
+  <span class="stripe-subtext">1234567</span>&nbsp;&nbsp;John Brown
 </div>
 */
 
 .stripe {
   background-color: $purple;
   color: $white;
-  padding: 14px 0 9px;
+  padding: 10px;
+  line-height: 20px; /*this should probably be a variable*/
   .stripe-subtext {
-    color: lighten($purple, 55%);
+    color: lighten($purple, 45%);
   }
 }

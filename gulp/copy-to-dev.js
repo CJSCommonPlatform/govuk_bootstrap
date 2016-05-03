@@ -64,6 +64,7 @@ module.exports = function (config) {
   gulp.task('copy-external-assets', [
     'copy-asset-images',
     'copy-stylesheet-images',
+    'copy-frontend-toolkit-images',
     'copy-external-links']);
 
   gulp.task('copy-asset-images', function () {
@@ -73,6 +74,11 @@ module.exports = function (config) {
 
   gulp.task('copy-stylesheet-images', function () {
     return gulp.src(config.nodeModules.assets.govUkTemplateStylesheetImages + '/**')
+      .pipe(gulp.dest(config.dev.assets.images));
+  });
+
+  gulp.task('copy-frontend-toolkit-images', function () {
+    return gulp.src(config.nodeModules.assets.govUkFrontendToolkitImages + '/**')
       .pipe(gulp.dest(config.dev.assets.images));
   });
 

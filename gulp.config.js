@@ -48,15 +48,19 @@
           assets: './docs/app/assets',
           pageObject: {
             index : {
-              title : 'About',
+              title : 'GOV.UK Bootstrap',
               href : 'index.html'
             },
-            css : {
-              title : 'CSS',
-              href : 'css.html'
+            layout : {
+              title : 'Layout',
+              href : 'layout.html'
             },
-            elements : {
-              title : 'Elements',
+            content : {
+              title : 'Content',
+              href : 'content.html'
+            },
+            components : {
+              title : 'Components',
               href : 'elements.html'
             },
             developer_guide : {
@@ -76,7 +80,8 @@
         assets: {
           govUkTemplateAssetImages: './node_modules/govuk_template_ejs/assets/images',
           govUkTemplateStylesheetImages: './node_modules/govuk_template_ejs/assets/stylesheets/images',
-          govUkTemplateStylesheetExternalLinks: './node_modules/govuk_template_ejs/assets/stylesheets/external-links'
+          govUkTemplateStylesheetExternalLinks: './node_modules/govuk_template_ejs/assets/stylesheets/external-links',
+          govUkFrontendToolkitImages: './node_modules/govuk_frontend_toolkit/images'
         },
         template: './node_modules/govuk_template_ejs/views/layouts'
 
