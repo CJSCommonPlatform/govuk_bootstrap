@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="app" id="ng-app">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
+  <link rel="mask-icon" href="assets/images/gov.uk_logotype_crown.svg" color="#0b0c0c">
+  <title>GovUK Bootstrap</title>
+  <link rel="stylesheet" href="assets/govuk_bootstrap.css" type="text/css"/>
+</head>
+<script>
+  document.addEventListener("DOMContentLoaded", init, false);
+  function init() {
+    var codeBlocks = document.querySelectorAll("pre code");
+    if(codeBlocks.length) {
+      for(var i=0, len=codeBlocks.length; i<len; i++) {
+        var dom = codeBlocks[i];
+        var html = dom.innerHTML;
+        html = html.replace(/</g,"&lt;").replace(/>/g,"&gt;");
+        dom.innerHTML = html;
+      }
+    }
+  }
+</script>
+<body id="top">
+  <header role="banner" id="global-header" class="with-proposition">
+    <div class="header-wrapper">
+      <div class="header-global">
+        <div class="header-logo">
+          <a href="https://www.gov.uk" title="Go to the GOV.UK homepage" id="logo" class="content">
+            <img src="assets/images/gov.uk_logotype_crown_invert_trans.png" width="35" height="31" alt=""> GOV.UK
+          </a>
+        </div>
+      </div>
+      <div class="header-proposition">
+        <div class="content">
+          <a href="#proposition-links" class="js-header-toggle menu">Menu</a>
+          <nav id="proposition-menu">
+  
+              <a href="index.html" id="proposition-name">GOV.UK Bootstrap</a>
+  
+            <ul id="proposition-links">
+                0
+                1
+                  <li><a href="layout.html">Layout</a></li>
+                2
+                  <li><a href="content.html">Content</a></li>
+                3
+                  <li><a href="elements.html">Components</a></li>
+                4
+                  <li><a href="developer_guide.html">Developer Guide</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div id="global-header-bar"></div>
+  <main role="main">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="phase-banner-alpha">
+            <p>
+              <strong class="phase-tag">ALPHA</strong>
+              <span>This is a new service – your <a href="https://designpatterns.hackpad.com/GOV.UK-elements-feedback-sKrDyQxcfA2">feedback</a> will help us to improve it.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <style>
+  .show-grid [class^=col-] {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: rgba(86,61,124,.15);
+    border: 1px solid rgba(86,61,124,.2);
+  }
+  .show-grid {
+    margin-bottom: 25px;
+  }
+</style>
+<!-- Breadcrumbs -->
+<div class="row">
+  <div class="col-xs-12">
+    <div class="breadcrumbs">
+      <ol>
+        <li><a href="index.html">GOV.UK Bootstrap</a></li>
+        <li><a href="layout.html">Layout</a></li>
+        <li>Grid System</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<!-- Headings -->
+<div class="row">
+  <div class="col-sm-8">
+    <h1 class="heading-xlarge">
+      <span class="heading-secondary">GOV.UK Bootstrap</span>
+      Grid System
+    </h1>
+    <p class="lead">
+      GOV.UK Bootstrap includes a responsive, mobile first fluid grid system that appropriately scales up to 12 columns as the device or viewport size increases. It includes predefined classes for easy layout options, as well as powerful mixins for generating more semantic layouts.
+    </p>
+  </div>
+</div>
+<!-- Contents -->
+<div class="row">
+  <div class="col-xs-12">
+    <h2 class="heading-small heading-contents">Contents:</h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-8">
+    <ul class="list-unstyled list-contents">
+      <li><a href="#introduction">Introduction</a></li>
+      <li><a href="#media-queries">Media queries</a></li>
+      <li><a href="#grid-options">Grid options</a></li>
+      <li><a href="#stacked-to-horizontal">Example: Stacked-to-horizontal</a></li>
+      <li><a href="#fluid-container">Example: Fluid container</a></li>
+      <li><a href="#mobile-and-desktop">Example: Mobile and desktop</a></li>
+      <li><a href="#mobile-tablet-desktop">Example: Mobile, tablet, desktop</a></li>
+      <li><a href="#column-wrapping">Example: Column wrapping</a></li>
+      <li><a href="#responsive-column-resets">Responsive column resets</a></li>
+      <li><a href="#offsetting-columns">Offsetting columns</a></li>
+      <li><a href="#nesting-columns">Nesting columns</a></li>
+      <li><a href="#column-ordering">Column ordering</a></li>
+      <li><a href="#sass-mixins-and-variables">Sass mixins and variables</a></li>
+    </ul>
+  </div>
+</div>
+<!-- Introduction -->
+<div class="row">
+  <div class="col-sm-8">
+    <h3 class="heading-medium" id="introduction">Introduction</h3>
+    <p>Grid systems are used for creating page layouts through a series of rows and columns that house your content. Here's how the Bootstrap grid system works:</p>
+    <ul>
+      <li>Rows must be placed within a <code>.container</code> (fixed-width) or <code>.container-fluid</code> (full-width) for proper alignment and padding.</li>
+      <li>Use rows to create horizontal groups of columns.</li>
+      <li>Content should be placed within columns, and only columns may be immediate children of rows.</li>
+      <li>Predefined grid classes like <code>.row</code> and <code>.col-xs-4</code> are available for quickly making grid layouts. Less mixins can also be used for more semantic layouts.</li>
+      <li>Columns create gutters (gaps between column content) via <code>padding</code>. That padding is offset in rows for the first and last column via negative margin on <code>.row</code>s.</li>
+      <li>The negative margin is why the examples below are outdented. It's so that content within grid columns is lined up with non-grid content.</li>
+      <li>Grid columns are created by specifying the number of twelve available columns you wish to span. For example, three equal columns would use three <code>.col-xs-4</code>.</li>
+      <li>If more than 12 columns are placed within a single row, each group of extra columns will, as one unit, wrap onto a new line.</li>
+      <li>Grid classes apply to devices with screen widths greater than or equal to the breakpoint sizes, and override grid classes targeted at smaller devices. Therefore, e.g. applying any <code>.col-md-*</code> class to an element will not only affect its styling on medium devices but also on large devices if a <code>.col-lg-*</code> class is not present.</li>
+    </ul>
+    <p>Look to the examples for applying these principles to your code.</p>
+  </div>
+</div>
+<!-- Media Queries -->
+<div class="row">
+  <div class="col-sm-8">
+    <h3 class="heading-medium" id="media-queries">Media queries</h3>
+    <p>We use the following media queries in our SASS files to create the key breakpoints in our grid system.</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <pre>
+      <code class="language-scss">
+        /* Extra small devices (phones, less than 768px) */
+        /* No media query since this is the default in Bootstrap */
+
+        /* Small devices (tablets, 768px and up) */
+        @media (min-width: @screen-sm-min) { ... }
+
+
+        /* Medium devices (desktops, 992px and up) */
+        @media (min-width: @screen-md-min) { ... }
+
+        /* Large devices (large desktops, 1200px and up) */
+        @media (min-width: @screen-lg-min) { ... }
+      </code>
+    </pre>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-8">
+    <p>We occasionally expand on these media queries to include a max-width to limit CSS to a narrower set of devices.</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <pre>
+      <code class="language-scss">
+        @media (max-width: @screen-xs-max) { ... }
+        @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) { ... }
+        @media (min-width: @screen-md-min) and (max-width: @screen-md-max) { ... }
+        @media (min-width: @screen-lg-min) { ... }
+      </code>
+    </pre>
+  </div>
+</div>
+<!-- Grid options -->
+<div class="row">
+  <div class="col-sm-8">
+    <h3 class="heading-medium" id="grid-options">Grid options</h3>
+    <p>See how aspects of the Bootstrap grid system work across multiple devices with a handy table.</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th></th>
+          <th> Extra small devices <small>Phones (&lt;768px)</small> </th>
+          <th> Small devices <small>Tablets (≥768px)</small> </th>
+          <th> Medium devices <small>Desktops (≥992px)</small> </th>
+          <th> Large devices <small>Desktops (≥1200px)</small> </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th class="text-nowrap" scope="row">Grid behavior</th>
+          <td>Horizontal at all times</td> <td colspan="3">Collapsed to start, horizontal above breakpoints</td>
+        </tr>
+        <tr>
+          <th class="text-nowrap" scope="row">Container width</th>
+          <td>None (auto)</td>
+          <td>750px</td>
+          <td>970px</td>
+          <td>1170px</td>
+        </tr>
+        <tr>
+          <th class="text-nowrap" scope="row">Class prefix</th>
+          <td><code>.col-xs-</code></td>
+          <td><code>.col-sm-</code></td>
+          <td><code>.col-md-</code></td>
+          <td><code>.col-lg-</code></td>
+        </tr>
+        <tr>
+          <th class="text-nowrap" scope="row"># of columns</th>
+          <td colspan="4">12</td>
+        </tr>
+        <tr>
+          <th class="text-nowrap" scope="row">Column width</th>
+          <td class="text-muted">Auto</td>
+          <td>~62px</td>
+          <td>~81px</td>
+          <td>~97px</td>
+        </tr>
+        <tr>
+          <th class="text-nowrap" scope="row">Gutter width</th>
+          <td colspan="4">30px (15px on each side of a column)</td>
+        </tr>
+        <tr>
+          <th class="text-nowrap" scope="row">Nestable</th>
+          <td colspan="4">Yes</td>
+        </tr>
+        <tr>
+          <th class="text-nowrap" scope="row">Offsets</th>
+          <td colspan="4">Yes</td>
+        </tr>
+        <tr>
+          <th class="text-nowrap" scope="row">Column ordering</th>
+          <td colspan="4">Yes</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- Grid options -->
+<div class="row">
+  <div class="col-sm-8">
+    <h3 class="heading-medium" id="stacked-to-horizontal">Example: Stacked-to-horizontal</h3>
+    <p>Using a single set of <code>.col-md-*</code> grid classes, you can create a basic grid system that starts out stacked on mobile devices and tablet devices (the extra small to small range) before becoming horizontal on desktop (medium) devices. Place grid columns in any <code>.row</code>.</p>
+  </div>
+</div>
+<div class="row show-grid">
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+</div>
+<div class="row show-grid">
+  <div class="col-md-8">.col-md-8</div>
+  <div class="col-md-4">.col-md-4</div>
+</div>
+<div class="row show-grid">
+  <div class="col-md-4">.col-md-4</div>
+  <div class="col-md-4">.col-md-4</div>
+  <div class="col-md-4">.col-md-4</div>
+</div>
+<div class="row show-grid">
+  <div class="col-md-6">.col-md-6</div>
+  <div class="col-md-6">.col-md-6</div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <pre>
+      <code class="language-markup">
+        <div class="row">
+          <div class="col-md-1">.col-md-1</div>
+          <div class="col-md-1">.col-md-1</div>
+          <div class="col-md-1">.col-md-1</div>
+          <div class="col-md-1">.col-md-1</div>
+          <div class="col-md-1">.col-md-1</div>
+          <div class="col-md-1">.col-md-1</div>
+          <div class="col-md-1">.col-md-1</div>
+          <div class="col-md-1">.col-md-1</div>
+          <div class="col-md-1">.col-md-1</div>
+          <div class="col-md-1">.col-md-1</div>
+          <div class="col-md-1">.col-md-1</div>
+          <div class="col-md-1">.col-md-1</div>
+        </div>
+        <div class="row">
+          <div class="col-md-8">.col-md-8</div>
+          <div class="col-md-4">.col-md-4</div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">.col-md-4</div>
+          <div class="col-md-4">.col-md-4</div>
+          <div class="col-md-4">.col-md-4</div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">.col-md-6</div>
+          <div class="col-md-6">.col-md-6</div>
+        </div>
+      </code>
+    </pre>
+  </div>
+</div>
+<!-- Fluid Container -->
+<div class="row">
+  <div class="col-sm-8">
+    <h3 class="heading-medium" id="fluid-container">Example: Fluid container</h3>
+    <p>Turn any fixed-width grid layout into a full-width layout by changing your outermost <code>.container</code> to <code>.container-fluid</code>.</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <pre>
+      <code class="language-markup">
+        <div class="container-fluid">
+          <div class="row">
+            ...
+          </div>
+        </div>
+      </code>
+    </pre>
+  </div>
+</div>
+<!-- Fluid Container -->
+<div class="row">
+  <div class="col-sm-8">
+    <h3 class="heading-medium" id="mobile-and-desktop">Example: Fluid container</h3>
+    <p>Don't want your columns to simply stack in smaller devices? Use the extra small and medium device grid classes by adding <code>.col-xs-*</code> <code>.col-md-*</code> to your columns. See the example below for a better idea of how it all works.</p>
+  </div>
+</div>
+<div class="row show-grid">
+  <div class="col-xs-12 col-md-8">.col-xs-12 .col-md-8</div>
+  <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+</div>
+<div class="row show-grid">
+  <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+  <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+  <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+</div>
+<div class="row show-grid">
+  <div class="col-xs-6">.col-xs-6</div>
+  <div class="col-xs-6">.col-xs-6</div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <pre>
+      <code class="language-markup">
+        <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+        <div class="row">
+          <div class="col-xs-12 col-md-8">.col-xs-12 .col-md-8</div>
+          <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+        </div>
+
+        <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+        <div class="row">
+          <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+          <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+          <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+        </div>
+
+        <!-- Columns are always 50% wide, on mobile and desktop -->
+        <div class="row">
+          <div class="col-xs-6">.col-xs-6</div>
+          <div class="col-xs-6">.col-xs-6</div>
+        </div>
+      </code>
+    </pre>
+  </div>
+</div>
+<!-- Mobile, tablet, desktop -->
+<div class="row">
+  <div class="col-sm-8">
+    <h3 class="heading-medium" id="mobile-tablet-desktop">Example: Mobile, tablet, desktop</h3>
+    <p>Build on the previous example by creating even more dynamic and powerful layouts with tablet <code>.col-sm-*</code> classes.</p>
+  </div>
+</div>
+<div class="row show-grid">
+  <div class="col-xs-12 col-sm-6 col-md-8">.col-xs-12 .col-sm-6 .col-md-8</div>
+  <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+</div>
+<div class="row show-grid">
+  <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+  <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+  <div class="clearfix visible-xs-block"></div>
+  <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <pre>
+      <code class="language-markup">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-8">.col-xs-12 .col-sm-6 .col-md-8</div>
+          <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+          <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+          <!-- Optional: clear the XS cols if their content doesn't match in height -->
+          <div class="clearfix visible-xs-block"></div>
+          <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+        </div>
+      </code>
+    </pre>
+  </div>
+</div>
+<!-- Example: Column wrapping -->
+<div class="row">
+  <div class="col-sm-8">
+    <h3 class="heading-medium" id="column-wrapping">Example: Example: Column wrapping</h3>
+    <p>If more than 12 columns are placed within a single row, each group of extra columns will, as one unit, wrap onto a new line.</p>
+  </div>
+</div>
+<div class="row show-grid">
+  <div class="col-xs-9">.col-xs-9</div>
+  <div class="col-xs-4">.col-xs-4<br>Since 9 + 4 = 13 &gt; 12, this 4-column-wide div gets wrapped onto a new line as one contiguous unit.</div>
+  <div class="col-xs-6">.col-xs-6<br>Subsequent columns continue along the new line.</div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <pre>
+      <code class="language-markup">
+        <div class="row">
+          <div class="col-xs-9">.col-xs-9</div>
+          <div class="col-xs-4">.col-xs-4<br>Since 9 + 4 = 13 &gt; 12, this 4-column-wide div gets wrapped onto a new line as one contiguous unit.</div>
+          <div class="col-xs-6">.col-xs-6<br>Subsequent columns continue along the new line.</div>
+        </div>
+      </code>
+    </pre>
+  </div>
+</div>
+<!-- Responsive column resets -->
+<div class="row">
+  <div class="col-sm-8">
+    <h3 class="heading-medium" id="responsive-column-resets">Responsive column resets</h3>
+    <p>With the four tiers of grids available you're bound to run into issues where, at certain breakpoints, your columns don't clear quite right as one is taller than the other. To fix that, use a combination of a <code>.clearfix</code> and our <a href="#tbc">responsive utility classes</a>.</p>
+  </div>
+</div>
+<div class="row show-grid">
+  <div class="col-xs-6 col-sm-3"> .col-xs-6 .col-sm-3 <br> Resize your viewport or check it out on your phone for an example. </div>
+  <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+  <div class="clearfix visible-xs-block"></div>
+  <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+  <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <pre>
+      <code class="language-markup">
+        <div class="row">
+          <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+          <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+
+          <!-- Add the extra clearfix for only the required viewport -->
+          <div class="clearfix visible-xs-block"></div>
+
+          <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+          <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+        </div>
+      </code>
+    </pre>
+  </div>
+</div>
+<!-- Offsetting columns -->
+<div class="row">
+  <div class="col-sm-8">
+    <h3 class="heading-medium" id="offsetting-columns">Offsetting columns</h3>
+    <p>Move columns to the right using <code>.col-md-offset-*</code> classes. These classes increase the left margin of a column by <code>*</code> columns. For example, <code>.col-md-offset-4</code> moves <code>.col-md-4</code> over four columns.</p>
+  </div>
+</div>
+<div class="row show-grid">
+  <div class="col-md-4">.col-md-4</div>
+  <div class="col-md-4 col-md-offset-4">.col-md-4 .col-md-offset-4</div>
+</div>
+<div class="row show-grid">
+  <div class="col-md-3 col-md-offset-3">.col-md-3 .col-md-offset-3</div>
+  <div class="col-md-3 col-md-offset-3">.col-md-3 .col-md-offset-3</div>
+</div>
+<div class="row show-grid">
+  <div class="col-md-6 col-md-offset-3">.col-md-6 .col-md-offset-3</div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <pre>
+      <code class="language-markup">
+        <div class="row">
+          <div class="col-md-4">.col-md-4</div>
+          <div class="col-md-4 col-md-offset-4">.col-md-4 .col-md-offset-4</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 col-md-offset-3">.col-md-3 .col-md-offset-3</div>
+          <div class="col-md-3 col-md-offset-3">.col-md-3 .col-md-offset-3</div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">.col-md-6 .col-md-offset-3</div>
+        </div>
+      </code>
+    </pre>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-8">
+    <p>You can also override offsets from lower grid tiers with <code>.col-*-offset-0</code> classes.</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <pre>
+      <code class="language-markup">
+        <div class="row">
+          <div class="col-xs-6 col-sm-4">
+          </div>
+          <div class="col-xs-6 col-sm-4">
+          </div>
+          <div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-0">
+          </div>
+        </div>
+      </code>
+    </pre>
+  </div>
+</div>
+<!-- Nesting columns -->
+<div class="row">
+  <div class="col-sm-8">
+    <h3 class="heading-medium" id="nesting-columns">Nesting columns</h3>
+    <p>To nest your content with the default grid, add a new <code>.row</code> and set of <code>.col-sm-*</code> columns within an existing <code>.col-sm-*</code> column. Nested rows should include a set of columns that add up to 12 or fewer (it is not required that you use all 12 available columns).</p>
+  </div>
+</div>
+<div class="row show-grid">
+  <div class="col-sm-9"> Level 1: .col-sm-9
+    <div class="row show-grid">
+      <div class="col-xs-8 col-sm-6"> Level 2: .col-xs-8 .col-sm-6
+      </div>
+      <div class="col-xs-4 col-sm-6"> Level 2: .col-xs-4 .col-sm-6
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <pre>
+      <code class="language-markup">
+        <div class="row">
+          <div class="col-sm-9">
+            Level 1: .col-sm-9
+            <div class="row">
+              <div class="col-xs-8 col-sm-6">
+                Level 2: .col-xs-8 .col-sm-6
+              </div>
+              <div class="col-xs-4 col-sm-6">
+                Level 2: .col-xs-4 .col-sm-6
+              </div>
+            </div>
+          </div>
+        </div>
+      </code>
+    </pre>
+  </div>
+</div>
+<!-- Column ordering -->
+<div class="row">
+  <div class="col-sm-8">
+    <h3 class="heading-medium" id="column-ordering">Column ordering</h3>
+    <p>Easily change the order of our built-in grid columns with <code>.col-md-push-*</code> and <code>.col-md-pull-*</code> modifier classes.</p>
+  </div>
+</div>
+<div class="row show-grid">
+  <div class="col-md-9 col-md-push-3">.col-md-9 .col-md-push-3</div>
+  <div class="col-md-3 col-md-pull-9">.col-md-3 .col-md-pull-9</div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <pre>
+      <code class="language-markup">
+        <div class="row">
+          <div class="col-md-9 col-md-push-3">.col-md-9 .col-md-push-3</div>
+          <div class="col-md-3 col-md-pull-9">.col-md-3 .col-md-pull-9</div>
+        </div>
+      </code>
+    </pre>
+  </div>
+</div>
+<!-- Sass mixins and variables -->
+<div class="row">
+  <div class="col-sm-8">
+    <h3 class="heading-medium" id="sass-mixins-and-variables">Sass mixins and variables</h3>
+    <p>In addition to <a href="#stacked-to-horizontal">prebuilt grid classes</a> for fast layouts, Bootstrap includes Less variables and mixins for quickly generating your own simple, semantic layouts.</p>
+    <h4 class="heading-small">Variables</h4>
+    <p>Variables determine the number of columns, the gutter width, and the media query point at which to begin floating columns. We use these to generate the predefined grid classes documented above, as well as for the custom mixins listed below.</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <pre>
+      <code class="language-sass">
+        @grid-columns:              12;
+        @grid-gutter-width:         30px;
+        @grid-float-breakpoint:     768px;
+      </code>
+    </pre>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-8">
+    <h4 class="heading-small">Mixins</h4>
+    <p>Mixins are used in conjunction with the grid variables to generate semantic CSS for individual grid columns.</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <pre>
+      <code class="language-sass">
+        // Creates a wrapper for a series of columns
+        .make-row(@gutter: @grid-gutter-width) {
+          // Then clear the floated columns
+          .clearfix();
+
+          @media (min-width: @screen-sm-min) {
+            margin-left:  (@gutter / -2);
+            margin-right: (@gutter / -2);
+          }
+
+          // Negative margin nested rows out to align the content of columns
+          .row {
+            margin-left:  (@gutter / -2);
+            margin-right: (@gutter / -2);
+          }
+        }
+
+        // Generate the extra small columns
+        .make-xs-column(@columns; @gutter: @grid-gutter-width) {
+          position: relative;
+          // Prevent columns from collapsing when empty
+          min-height: 1px;
+          // Inner gutter via padding
+          padding-left:  (@gutter / 2);
+          padding-right: (@gutter / 2);
+
+          // Calculate width based on number of columns available
+          @media (min-width: @grid-float-breakpoint) {
+            float: left;
+            width: percentage((@columns / @grid-columns));
+          }
+        }
+
+        // Generate the small columns
+        .make-sm-column(@columns; @gutter: @grid-gutter-width) {
+          position: relative;
+          // Prevent columns from collapsing when empty
+          min-height: 1px;
+          // Inner gutter via padding
+          padding-left:  (@gutter / 2);
+          padding-right: (@gutter / 2);
+
+          // Calculate width based on number of columns available
+          @media (min-width: @screen-sm-min) {
+            float: left;
+            width: percentage((@columns / @grid-columns));
+          }
+        }
+
+        // Generate the small column offsets
+        .make-sm-column-offset(@columns) {
+          @media (min-width: @screen-sm-min) {
+            margin-left: percentage((@columns / @grid-columns));
+          }
+        }
+        .make-sm-column-push(@columns) {
+          @media (min-width: @screen-sm-min) {
+            left: percentage((@columns / @grid-columns));
+          }
+        }
+        .make-sm-column-pull(@columns) {
+          @media (min-width: @screen-sm-min) {
+            right: percentage((@columns / @grid-columns));
+          }
+        }
+
+        // Generate the medium columns
+        .make-md-column(@columns; @gutter: @grid-gutter-width) {
+          position: relative;
+          // Prevent columns from collapsing when empty
+          min-height: 1px;
+          // Inner gutter via padding
+          padding-left:  (@gutter / 2);
+          padding-right: (@gutter / 2);
+
+          // Calculate width based on number of columns available
+          @media (min-width: @screen-md-min) {
+            float: left;
+            width: percentage((@columns / @grid-columns));
+          }
+        }
+
+        // Generate the medium column offsets
+          .make-md-column-offset(@columns) {
+            @media (min-width: @screen-md-min) {
+            margin-left: percentage((@columns / @grid-columns));
+          }
+        }
+        .make-md-column-push(@columns) {
+          @media (min-width: @screen-md-min) {
+            left: percentage((@columns / @grid-columns));
+          }
+        }
+        .make-md-column-pull(@columns) {
+          @media (min-width: @screen-md-min) {
+            right: percentage((@columns / @grid-columns));
+          }
+        }
+
+        // Generate the large columns
+        .make-lg-column(@columns; @gutter: @grid-gutter-width) {
+          position: relative;
+          // Prevent columns from collapsing when empty
+          min-height: 1px;
+          // Inner gutter via padding
+          padding-left:  (@gutter / 2);
+          padding-right: (@gutter / 2);
+
+          // Calculate width based on number of columns available
+          @media (min-width: @screen-lg-min) {
+            float: left;
+            width: percentage((@columns / @grid-columns));
+          }
+        }
+
+        // Generate the large column offsets
+        .make-lg-column-offset(@columns) {
+          @media (min-width: @screen-lg-min) {
+            margin-left: percentage((@columns / @grid-columns));
+          }
+        }
+        .make-lg-column-push(@columns) {
+          @media (min-width: @screen-lg-min) {
+            left: percentage((@columns / @grid-columns));
+          }
+        }
+        .make-lg-column-pull(@columns) {
+          @media (min-width: @screen-lg-min) {
+            right: percentage((@columns / @grid-columns));
+          }
+        }
+      </code>
+    </pre>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-8">
+    <h4 class="heading-small">Example usage</h4>
+    <p>You can modify the variables to your own custom values, or just use the mixins with their default values. Here's an example of using the default settings to create a two-column layout with a gap between.</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <pre>
+      <code class="language-sass">
+        .wrapper {
+          .make-row();
+        }
+        .content-main {
+          .make-lg-column(8);
+        }
+        .content-secondary {
+          .make-lg-column(3);
+          .make-lg-column-offset(1);
+        }
+      </code>
+    </pre>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <pre>
+      <code class="language-markup">
+        <div class="wrapper">
+          <div class="content-main">...</div>
+          <div class="content-secondary">...</div>
+        </div>
+      </code>
+    </pre>
+  </div>
+</div>
+
+    </div>
+  </main>
+  <footer class="group js-footer" id="footer" role="contentinfo">
+    <div class="footer-wrapper">
+      <div class="footer-meta">
+        <div class="footer-meta-inner">
+          <div class="open-government-licence">
+            <p class="logo"><a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence</a></p>
+            <p>All content is available under the <a href='https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/' rel='license'>Open Government Licence v3.0</a>, except where otherwise stated</p>
+          </div>
+        </div>
+        <div class="copyright">
+          <a href="http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/">© Crown copyright</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script>
+    /* http://prismjs.com/download.html?themes=prism&languages=markup+css+clike+javascript+less+sass+scss&plugins=normalize-whitespace */
+  var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},Prism=function(){var e=/\blang(?:uage)?-(\w+)\b/i,t=0,n=_self.Prism={util:{encode:function(e){return e instanceof a?new a(e.type,n.util.encode(e.content),e.alias):"Array"===n.util.type(e)?e.map(n.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++t}),e.__id},clone:function(e){var t=n.util.type(e);switch(t){case"Object":var a={};for(var r in e)e.hasOwnProperty(r)&&(a[r]=n.util.clone(e[r]));return a;case"Array":return e.map&&e.map(function(e){return n.util.clone(e)})}return e}},languages:{extend:function(e,t){var a=n.util.clone(n.languages[e]);for(var r in t)a[r]=t[r];return a},insertBefore:function(e,t,a,r){r=r||n.languages;var l=r[e];if(2==arguments.length){a=arguments[1];for(var i in a)a.hasOwnProperty(i)&&(l[i]=a[i]);return l}var o={};for(var s in l)if(l.hasOwnProperty(s)){if(s==t)for(var i in a)a.hasOwnProperty(i)&&(o[i]=a[i]);o[s]=l[s]}return n.languages.DFS(n.languages,function(t,n){n===r[e]&&t!=e&&(this[t]=o)}),r[e]=o},DFS:function(e,t,a,r){r=r||{};for(var l in e)e.hasOwnProperty(l)&&(t.call(e,l,e[l],a||l),"Object"!==n.util.type(e[l])||r[n.util.objId(e[l])]?"Array"!==n.util.type(e[l])||r[n.util.objId(e[l])]||(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,l,r)):(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,null,r)))}},plugins:{},highlightAll:function(e,t){var a={callback:t,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};n.hooks.run("before-highlightall",a);for(var r,l=a.elements||document.querySelectorAll(a.selector),i=0;r=l[i++];)n.highlightElement(r,e===!0,a.callback)},highlightElement:function(t,a,r){for(var l,i,o=t;o&&!e.test(o.className);)o=o.parentNode;o&&(l=(o.className.match(e)||[,""])[1],i=n.languages[l]),t.className=t.className.replace(e,"").replace(/\s+/g," ")+" language-"+l,o=t.parentNode,/pre/i.test(o.nodeName)&&(o.className=o.className.replace(e,"").replace(/\s+/g," ")+" language-"+l);var s=t.textContent,u={element:t,language:l,grammar:i,code:s};if(n.hooks.run("before-sanity-check",u),!u.code||!u.grammar)return n.hooks.run("complete",u),void 0;if(n.hooks.run("before-highlight",u),a&&_self.Worker){var c=new Worker(n.filename);c.onmessage=function(e){u.highlightedCode=e.data,n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(u.element),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},c.postMessage(JSON.stringify({language:u.language,code:u.code,immediateClose:!0}))}else u.highlightedCode=n.highlight(u.code,u.grammar,u.language),n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(t),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},highlight:function(e,t,r){var l=n.tokenize(e,t);return a.stringify(n.util.encode(l),r)},tokenize:function(e,t){var a=n.Token,r=[e],l=t.rest;if(l){for(var i in l)t[i]=l[i];delete t.rest}e:for(var i in t)if(t.hasOwnProperty(i)&&t[i]){var o=t[i];o="Array"===n.util.type(o)?o:[o];for(var s=0;s<o.length;++s){var u=o[s],c=u.inside,g=!!u.lookbehind,h=!!u.greedy,f=0,d=u.alias;u=u.pattern||u;for(var p=0;p<r.length;p++){var m=r[p];if(r.length>e.length)break e;if(!(m instanceof a)){u.lastIndex=0;var y=u.exec(m),v=1;if(!y&&h&&p!=r.length-1){var b=r[p+1].matchedStr||r[p+1],k=m+b;if(p<r.length-2&&(k+=r[p+2].matchedStr||r[p+2]),u.lastIndex=0,y=u.exec(k),!y)continue;var w=y.index+(g?y[1].length:0);if(w>=m.length)continue;var _=y.index+y[0].length,P=m.length+b.length;if(v=3,P>=_){if(r[p+1].greedy)continue;v=2,k=k.slice(0,P)}m=k}if(y){g&&(f=y[1].length);var w=y.index+f,y=y[0].slice(f),_=w+y.length,S=m.slice(0,w),O=m.slice(_),j=[p,v];S&&j.push(S);var A=new a(i,c?n.tokenize(y,c):y,d,y,h);j.push(A),O&&j.push(O),Array.prototype.splice.apply(r,j)}}}}}return r},hooks:{all:{},add:function(e,t){var a=n.hooks.all;a[e]=a[e]||[],a[e].push(t)},run:function(e,t){var a=n.hooks.all[e];if(a&&a.length)for(var r,l=0;r=a[l++];)r(t)}}},a=n.Token=function(e,t,n,a,r){this.type=e,this.content=t,this.alias=n,this.matchedStr=a||null,this.greedy=!!r};if(a.stringify=function(e,t,r){if("string"==typeof e)return e;if("Array"===n.util.type(e))return e.map(function(n){return a.stringify(n,t,e)}).join("");var l={type:e.type,content:a.stringify(e.content,t,r),tag:"span",classes:["token",e.type],attributes:{},language:t,parent:r};if("comment"==l.type&&(l.attributes.spellcheck="true"),e.alias){var i="Array"===n.util.type(e.alias)?e.alias:[e.alias];Array.prototype.push.apply(l.classes,i)}n.hooks.run("wrap",l);var o="";for(var s in l.attributes)o+=(o?" ":"")+s+'="'+(l.attributes[s]||"")+'"';return"<"+l.tag+' class="'+l.classes.join(" ")+'" '+o+">"+l.content+"</"+l.tag+">"},!_self.document)return _self.addEventListener?(_self.addEventListener("message",function(e){var t=JSON.parse(e.data),a=t.language,r=t.code,l=t.immediateClose;_self.postMessage(n.highlight(r,n.languages[a],a)),l&&_self.close()},!1),_self.Prism):_self.Prism;var r=document.currentScript||[].slice.call(document.getElementsByTagName("script")).pop();return r&&(n.filename=r.src,document.addEventListener&&!r.hasAttribute("data-manual")&&document.addEventListener("DOMContentLoaded",n.highlightAll)),_self.Prism}();"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
+  Prism.languages.markup={comment:/<!--[\w\W]*?-->/,prolog:/<\?[\w\W]+?\?>/,doctype:/<!DOCTYPE[\w\W]+?>/,cdata:/<!\[CDATA\[[\w\W]*?]]>/i,tag:{pattern:/<\/?(?!\d)[^\s>\/=.$<]+(?:\s+[^\s>\/=]+(?:=(?:("|')(?:\\\1|\\?(?!\1)[\w\W])*\1|[^\s'">=]+))?)*\s*\/?>/i,inside:{tag:{pattern:/^<\/?[^\s>\/]+/i,inside:{punctuation:/^<\/?/,namespace:/^[^\s>\/:]+:/}},"attr-value":{pattern:/=(?:('|")[\w\W]*?(\1)|[^\s>]+)/i,inside:{punctuation:/[=>"']/}},punctuation:/\/?>/,"attr-name":{pattern:/[^\s>\/]+/,inside:{namespace:/^[^\s>\/:]+:/}}}},entity:/&#?[\da-z]{1,8};/i},Prism.hooks.add("wrap",function(a){"entity"===a.type&&(a.attributes.title=a.content.replace(/&amp;/,"&"))}),Prism.languages.xml=Prism.languages.markup,Prism.languages.html=Prism.languages.markup,Prism.languages.mathml=Prism.languages.markup,Prism.languages.svg=Prism.languages.markup;
+  Prism.languages.css={comment:/\/\*[\w\W]*?\*\//,atrule:{pattern:/@[\w-]+?.*?(;|(?=\s*\{))/i,inside:{rule:/@[\w-]+/}},url:/url\((?:(["'])(\\(?:\r\n|[\w\W])|(?!\1)[^\\\r\n])*\1|.*?)\)/i,selector:/[^\{\}\s][^\{\};]*?(?=\s*\{)/,string:/("|')(\\(?:\r\n|[\w\W])|(?!\1)[^\\\r\n])*\1/,property:/(\b|\B)[\w-]+(?=\s*:)/i,important:/\B!important\b/i,"function":/[-a-z0-9]+(?=\()/i,punctuation:/[(){};:]/},Prism.languages.css.atrule.inside.rest=Prism.util.clone(Prism.languages.css),Prism.languages.markup&&(Prism.languages.insertBefore("markup","tag",{style:{pattern:/(<style[\w\W]*?>)[\w\W]*?(?=<\/style>)/i,lookbehind:!0,inside:Prism.languages.css,alias:"language-css"}}),Prism.languages.insertBefore("inside","attr-value",{"style-attr":{pattern:/\s*style=("|').*?\1/i,inside:{"attr-name":{pattern:/^\s*style/i,inside:Prism.languages.markup.tag.inside},punctuation:/^\s*=\s*['"]|['"]\s*$/,"attr-value":{pattern:/.+/i,inside:Prism.languages.css}},alias:"language-css"}},Prism.languages.markup.tag));
+  Prism.languages.clike={comment:[{pattern:/(^|[^\\])\/\*[\w\W]*?\*\//,lookbehind:!0},{pattern:/(^|[^\\:])\/\/.*/,lookbehind:!0}],string:{pattern:/(["'])(\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,greedy:!0},"class-name":{pattern:/((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[a-z0-9_\.\\]+/i,lookbehind:!0,inside:{punctuation:/(\.|\\)/}},keyword:/\b(if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,"boolean":/\b(true|false)\b/,"function":/[a-z0-9_]+(?=\()/i,number:/\b-?(?:0x[\da-f]+|\d*\.?\d+(?:e[+-]?\d+)?)\b/i,operator:/--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*|\/|~|\^|%/,punctuation:/[{}[\];(),.:]/};
+  Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|var|void|while|with|yield)\b/,number:/\b-?(0x[\dA-Fa-f]+|0b[01]+|0o[0-7]+|\d*\.?\d+([Ee][+-]?\d+)?|NaN|Infinity)\b/,"function":/[_$a-zA-Z\xA0-\uFFFF][_$a-zA-Z0-9\xA0-\uFFFF]*(?=\()/i}),Prism.languages.insertBefore("javascript","keyword",{regex:{pattern:/(^|[^\/])\/(?!\/)(\[.+?]|\\.|[^\/\\\r\n])+\/[gimyu]{0,5}(?=\s*($|[\r\n,.;})]))/,lookbehind:!0,greedy:!0}}),Prism.languages.insertBefore("javascript","class-name",{"template-string":{pattern:/`(?:\\\\|\\?[^\\])*?`/,greedy:!0,inside:{interpolation:{pattern:/\$\{[^}]+\}/,inside:{"interpolation-punctuation":{pattern:/^\$\{|\}$/,alias:"punctuation"},rest:Prism.languages.javascript}},string:/[\s\S]+/}}}),Prism.languages.markup&&Prism.languages.insertBefore("markup","tag",{script:{pattern:/(<script[\w\W]*?>)[\w\W]*?(?=<\/script>)/i,lookbehind:!0,inside:Prism.languages.javascript,alias:"language-javascript"}}),Prism.languages.js=Prism.languages.javascript;
+  Prism.languages.less=Prism.languages.extend("css",{comment:[/\/\*[\w\W]*?\*\//,{pattern:/(^|[^\\])\/\/.*/,lookbehind:!0}],atrule:{pattern:/@[\w-]+?(?:\([^{}]+\)|[^(){};])*?(?=\s*\{)/i,inside:{punctuation:/[:()]/}},selector:{pattern:/(?:@\{[\w-]+\}|[^{};\s@])(?:@\{[\w-]+\}|\([^{}]*\)|[^{};@])*?(?=\s*\{)/,inside:{variable:/@+[\w-]+/}},property:/(?:@\{[\w-]+\}|[\w-])+(?:\+_?)?(?=\s*:)/i,punctuation:/[{}();:,]/,operator:/[+\-*\/]/}),Prism.languages.insertBefore("less","punctuation",{"function":Prism.languages.less.function}),Prism.languages.insertBefore("less","property",{variable:[{pattern:/@[\w-]+\s*:/,inside:{punctuation:/:/}},/@@?[\w-]+/],"mixin-usage":{pattern:/([{;]\s*)[.#](?!\d)[\w-]+.*?(?=[(;])/,lookbehind:!0,alias:"function"}});
+  !function(e){e.languages.sass=e.languages.extend("css",{comment:{pattern:/^([ \t]*)\/[\/*].*(?:(?:\r?\n|\r)\1[ \t]+.+)*/m,lookbehind:!0}}),e.languages.insertBefore("sass","atrule",{"atrule-line":{pattern:/^(?:[ \t]*)[@+=].+/m,inside:{atrule:/(?:@[\w-]+|[+=])/m}}}),delete e.languages.sass.atrule;var a=/((\$[-_\w]+)|(#\{\$[-_\w]+\}))/i,t=[/[+*\/%]|[=!]=|<=?|>=?|\b(?:and|or|not)\b/,{pattern:/(\s+)-(?=\s)/,lookbehind:!0}];e.languages.insertBefore("sass","property",{"variable-line":{pattern:/^[ \t]*\$.+/m,inside:{punctuation:/:/,variable:a,operator:t}},"property-line":{pattern:/^[ \t]*(?:[^:\s]+ *:.*|:[^:\s]+.*)/m,inside:{property:[/[^:\s]+(?=\s*:)/,{pattern:/(:)[^:\s]+/,lookbehind:!0}],punctuation:/:/,variable:a,operator:t,important:e.languages.sass.important}}}),delete e.languages.sass.property,delete e.languages.sass.important,delete e.languages.sass.selector,e.languages.insertBefore("sass","punctuation",{selector:{pattern:/([ \t]*)\S(?:,?[^,\r\n]+)*(?:,(?:\r?\n|\r)\1[ \t]+\S(?:,?[^,\r\n]+)*)*/,lookbehind:!0}})}(Prism);
+  Prism.languages.scss=Prism.languages.extend("css",{comment:{pattern:/(^|[^\\])(?:\/\*[\w\W]*?\*\/|\/\/.*)/,lookbehind:!0},atrule:{pattern:/@[\w-]+(?:\([^()]+\)|[^(])*?(?=\s+[{;])/,inside:{rule:/@[\w-]+/}},url:/(?:[-a-z]+-)*url(?=\()/i,selector:{pattern:/(?=\S)[^@;\{\}\(\)]?([^@;\{\}\(\)]|&|#\{\$[-_\w]+\})+(?=\s*\{(\}|\s|[^\}]+(:|\{)[^\}]+))/m,inside:{placeholder:/%[-_\w]+/}}}),Prism.languages.insertBefore("scss","atrule",{keyword:[/@(?:if|else(?: if)?|for|each|while|import|extend|debug|warn|mixin|include|function|return|content)/i,{pattern:/( +)(?:from|through)(?= )/,lookbehind:!0}]}),Prism.languages.insertBefore("scss","property",{variable:/\$[-_\w]+|#\{\$[-_\w]+\}/}),Prism.languages.insertBefore("scss","function",{placeholder:{pattern:/%[-_\w]+/,alias:"selector"},statement:/\B!(?:default|optional)\b/i,"boolean":/\b(?:true|false)\b/,"null":/\bnull\b/,operator:{pattern:/(\s)(?:[-+*\/%]|[=!]=|<=?|>=?|and|or|not)(?=\s)/,lookbehind:!0}}),Prism.languages.scss.atrule.inside.rest=Prism.util.clone(Prism.languages.scss);
+  !function(){function e(e){this.defaults=r({},e)}function n(e){return e.replace(/-(\w)/g,function(e,n){return n.toUpperCase()})}function t(e){for(var n=0,t=0;t<e.length;++t)e.charCodeAt(t)=="	".charCodeAt(0)&&(n+=3);return e.length+n}if("undefined"!=typeof self&&self.Prism&&self.document){var r=Object.assign||function(e,n){for(var t in n)n.hasOwnProperty(t)&&(e[t]=n[t]);return e};e.prototype={setDefaults:function(e){this.defaults=r(this.defaults,e)},normalize:function(e,t){t=r(this.defaults,t);for(var i in t){var o=n(i);"normalize"!==i&&"setDefaults"!==o&&t[i]&&this[o]&&(e=this[o].call(this,e,t[i]))}return e},leftTrim:function(e){return e.replace(/^\s+/,"")},rightTrim:function(e){return e.replace(/\s+$/,"")},tabsToSpaces:function(e,n){return n=0|n||4,e.replace(/\t/g,new Array(++n).join(" "))},spacesToTabs:function(e,n){return n=0|n||4,e.replace(new RegExp(" {"+n+"}","g"),"	")},removeTrailing:function(e){return e.replace(/\s*?$/gm,"")},removeInitialLineFeed:function(e){return e.replace(/^(?:\r?\n|\r)/,"")},removeIndent:function(e){var n=e.match(/^[^\S\n\r]*(?=\S)/gm);return n&&n[0].length?(n.sort(function(e,n){return e.length-n.length}),n[0].length?e.replace(new RegExp("^"+n[0],"gm"),""):e):e},indent:function(e,n){return e.replace(/^[^\S\n\r]*(?=\S)/gm,new Array(++n).join("	")+"$&")},breakLines:function(e,n){n=n===!0?80:0|n||80;for(var r=e.split("\n"),i=0;i<r.length;++i)if(!(t(r[i])<=n)){for(var o=r[i].split(/(\s+)/g),a=0,l=0;l<o.length;++l){var s=t(o[l]);a+=s,a>n&&(o[l]="\n"+o[l],a=s)}r[i]=o.join("")}return r.join("\n")}},Prism.plugins.NormalizeWhitespace=new e({"remove-trailing":!0,"remove-indent":!0,"left-trim":!0,"right-trim":!0}),Prism.hooks.add("before-highlight",function(e){var n=e.element.parentNode;if(e.code&&n&&"pre"===n.nodeName.toLowerCase()&&(!e.settings||e.settings["whitespace-normalization"]!==!1)){for(var t=n.childNodes,r="",i="",o=!1,a=Prism.plugins.NormalizeWhitespace,l=0;l<t.length;++l){var s=t[l];s==e.element?o=!0:"#text"===s.nodeName&&(o?i+=s.nodeValue:r+=s.nodeValue,n.removeChild(s),--l)}if(e.element.children.length&&Prism.plugins.KeepMarkup){var u=r+e.element.innerHTML+i;e.element.innerHTML=a.normalize(u,e.settings),e.code=e.element.textContent}else e.code=r+e.code+i,e.code=a.normalize(e.code,e.settings)}})}}();
+   </script>
+</body>
+</html>
